@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { Home, Target, TrendingUp, User, Wallet } from 'lucide-react-native';
 
 export default function TabLayout() {
@@ -12,13 +12,16 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: '#1F2937',
           borderTopWidth: 0,
-          height: 90,
-          paddingBottom: 25,
+          height: Platform.OS === 'ios' ? 90 : 70,
+          paddingBottom: Platform.OS === 'ios' ? 25 : 10,
           paddingTop: 10,
         },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '600',
+        },
+        tabBarIconStyle: {
+          marginTop: 5,
         },
       }}
     >

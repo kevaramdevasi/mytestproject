@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -22,151 +23,153 @@ const { width } = Dimensions.get('window');
 
 export default function HomeScreen() {
   return (
-    <ScrollView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.greeting}>Hey Alex! 👋</Text>
-          <Text style={styles.subtitle}>Ready to grow your money?</Text>
-        </View>
-        <TouchableOpacity style={styles.profileButton}>
-          <View style={styles.profileAvatar}>
-            <Text style={styles.profileText}>A</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.greeting}>Hey Alex! 👋</Text>
+            <Text style={styles.subtitle}>Ready to grow your money?</Text>
           </View>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity style={styles.profileButton}>
+            <View style={styles.profileAvatar}>
+              <Text style={styles.profileText}>A</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
 
-      {/* Balance Card */}
-      <LinearGradient
-        colors={['#8B5CF6', '#EC4899', '#F59E0B']}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.balanceCard}
-      >
-        <View style={styles.balanceContent}>
-          <Text style={styles.balanceLabel}>Total Balance</Text>
-          <Text style={styles.balanceAmount}>$4,672.89</Text>
-          <View style={styles.balanceChange}>
-            <TrendingUp color="#ffffff" size={16} />
-            <Text style={styles.changeText}>+12.5% this month</Text>
+        {/* Balance Card */}
+        <LinearGradient
+          colors={['#8B5CF6', '#EC4899', '#F59E0B']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.balanceCard}
+        >
+          <View style={styles.balanceContent}>
+            <Text style={styles.balanceLabel}>Total Balance</Text>
+            <Text style={styles.balanceAmount}>$4,672.89</Text>
+            <View style={styles.balanceChange}>
+              <TrendingUp color="#ffffff" size={16} />
+              <Text style={styles.changeText}>+12.5% this month</Text>
+            </View>
+          </View>
+          <View style={styles.cardDecoration}>
+            <View style={styles.decorationCircle} />
+            <View style={styles.decorationCircle2} />
+          </View>
+        </LinearGradient>
+
+        {/* Quick Actions */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Quick Actions</Text>
+          <View style={styles.actionsGrid}>
+            <TouchableOpacity style={styles.actionButton}>
+              <View style={[styles.actionIcon, { backgroundColor: '#10B981' }]}>
+                <PlusCircle color="#ffffff" size={24} />
+              </View>
+              <Text style={styles.actionText}>Add Money</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionButton}>
+              <View style={[styles.actionIcon, { backgroundColor: '#3B82F6' }]}>
+                <ArrowUpRight color="#ffffff" size={24} />
+              </View>
+              <Text style={styles.actionText}>Send</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionButton}>
+              <View style={[styles.actionIcon, { backgroundColor: '#8B5CF6' }]}>
+                <Target color="#ffffff" size={24} />
+              </View>
+              <Text style={styles.actionText}>New Goal</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionButton}>
+              <View style={[styles.actionIcon, { backgroundColor: '#F59E0B' }]}>
+                <Zap color="#ffffff" size={24} />
+              </View>
+              <Text style={styles.actionText}>Invest</Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.cardDecoration}>
-          <View style={styles.decorationCircle} />
-          <View style={styles.decorationCircle2} />
-        </View>
-      </LinearGradient>
 
-      {/* Quick Actions */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Quick Actions</Text>
-        <View style={styles.actionsGrid}>
-          <TouchableOpacity style={styles.actionButton}>
-            <View style={[styles.actionIcon, { backgroundColor: '#10B981' }]}>
-              <PlusCircle color="#ffffff" size={24} />
-            </View>
-            <Text style={styles.actionText}>Add Money</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <View style={[styles.actionIcon, { backgroundColor: '#3B82F6' }]}>
-              <ArrowUpRight color="#ffffff" size={24} />
-            </View>
-            <Text style={styles.actionText}>Send</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <View style={[styles.actionIcon, { backgroundColor: '#8B5CF6' }]}>
-              <Target color="#ffffff" size={24} />
-            </View>
-            <Text style={styles.actionText}>New Goal</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <View style={[styles.actionIcon, { backgroundColor: '#F59E0B' }]}>
-              <Zap color="#ffffff" size={24} />
-            </View>
-            <Text style={styles.actionText}>Invest</Text>
-          </TouchableOpacity>
+        {/* Savings Goals */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Active Goals</Text>
+            <TouchableOpacity>
+              <Text style={styles.seeAll}>See All</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <GoalCard
+              title="New iPhone 15"
+              target={1200}
+              current={750}
+              color="#8B5CF6"
+              emoji="📱"
+            />
+            <GoalCard
+              title="Summer Vacation"
+              target={3000}
+              current={1850}
+              color="#EC4899"
+              emoji="🏖️"
+            />
+            <GoalCard
+              title="Gaming Setup"
+              target={2500}
+              current={900}
+              color="#10B981"
+              emoji="🎮"
+            />
+          </ScrollView>
         </View>
-      </View>
 
-      {/* Savings Goals */}
-      <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Active Goals</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAll}>See All</Text>
-          </TouchableOpacity>
+        {/* Recent Transactions */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Recent Activity</Text>
+            <TouchableOpacity>
+              <Text style={styles.seeAll}>See All</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.transactionsList}>
+            <TransactionItem
+              type="income"
+              title="Freelance Payment"
+              amount="+$450.00"
+              time="2 hours ago"
+              icon="💼"
+            />
+            <TransactionItem
+              type="expense"
+              title="Coffee & Snacks"
+              amount="-$12.50"
+              time="5 hours ago"
+              icon="☕"
+            />
+            <TransactionItem
+              type="savings"
+              title="iPhone Fund"
+              amount="+$50.00"
+              time="1 day ago"
+              icon="📱"
+            />
+          </View>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <GoalCard
-            title="New iPhone 15"
-            target={1200}
-            current={750}
-            color="#8B5CF6"
-            emoji="📱"
-          />
-          <GoalCard
-            title="Summer Vacation"
-            target={3000}
-            current={1850}
-            color="#EC4899"
-            emoji="🏖️"
-          />
-          <GoalCard
-            title="Gaming Setup"
-            target={2500}
-            current={900}
-            color="#10B981"
-            emoji="🎮"
-          />
-        </ScrollView>
-      </View>
 
-      {/* Recent Transactions */}
-      <View style={styles.section}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Recent Activity</Text>
-          <TouchableOpacity>
-            <Text style={styles.seeAll}>See All</Text>
-          </TouchableOpacity>
+        {/* Achievement */}
+        <View style={styles.achievementCard}>
+          <View style={styles.achievementIcon}>
+            <Award color="#F59E0B" size={24} />
+          </View>
+          <View style={styles.achievementContent}>
+            <Text style={styles.achievementTitle}>Streak Master! 🔥</Text>
+            <Text style={styles.achievementText}>
+              You've saved money for 7 days straight!
+            </Text>
+          </View>
         </View>
-        <View style={styles.transactionsList}>
-          <TransactionItem
-            type="income"
-            title="Freelance Payment"
-            amount="+$450.00"
-            time="2 hours ago"
-            icon="💼"
-          />
-          <TransactionItem
-            type="expense"
-            title="Coffee & Snacks"
-            amount="-$12.50"
-            time="5 hours ago"
-            icon="☕"
-          />
-          <TransactionItem
-            type="savings"
-            title="iPhone Fund"
-            amount="+$50.00"
-            time="1 day ago"
-            icon="📱"
-          />
-        </View>
-      </View>
-
-      {/* Achievement */}
-      <View style={styles.achievementCard}>
-        <View style={styles.achievementIcon}>
-          <Award color="#F59E0B" size={24} />
-        </View>
-        <View style={styles.achievementContent}>
-          <Text style={styles.achievementTitle}>Streak Master! 🔥</Text>
-          <Text style={styles.achievementText}>
-            You've saved money for 7 days straight!
-          </Text>
-        </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -237,6 +240,10 @@ function TransactionItem({ type, title, amount, time, icon }: {
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#0F172A',
+  },
   container: {
     flex: 1,
     backgroundColor: '#0F172A',
@@ -246,7 +253,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 20,
     paddingBottom: 20,
   },
   greeting: {
